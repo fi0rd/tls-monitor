@@ -1,0 +1,12 @@
+[Unit]
+Description=Run 2 __ targets_fetcher.go
+After=targets-exporter.service
+Requires=targets-exporter.service
+
+[Service]
+Type=oneshot
+ExecCondition=/bin/sh -c '[ "$(systemctl show -p ExecMainStatus --value targets-exporter.service)" -eq 0 ]'
+ExecStart=/bin/sh -c 'targets_fetcher --config /app/configs/targets_fetcher.yml >> /one/logs/targets_fetcher.log 2>&1'
+
+[Install]
+WantedBy=multi-user.target

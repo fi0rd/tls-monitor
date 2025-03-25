@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus Blackbox Exporter
+Wants=prometheus.service
+After=network-online.target
+
+[Service]
+User=root
+Group=root
+Type=simple
+Restart=on-failure
+SyslogIdentifier=certmon-prometheus-blackbox-exporter
+ExecStart=/usr/local/bin/blackbox_exporter \
+    --config.file /etc/prometheus/blackbox.yml
+
+[Install]
+WantedBy=multi-user.target
