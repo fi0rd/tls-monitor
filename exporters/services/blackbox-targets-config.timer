@@ -1,0 +1,9 @@
+[Unit]
+Description=certmon-service
+
+[Timer]
+# 0/2:30:00
+OnCalendar=*:30:00
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=Alertmanager for Prometheus
+Wants=prometheus.service
+After=network-online.target
+
+[Service]
+User=root
+Group=root
+Type=simple
+Restart=on-failure
+SyslogIdentifier=certmon-prometheus-alertmanager
+ExecStart=/usr/local/bin/alertmanager \
+    --config.file /etc/prometheus/alertmanager.yml
+
+[Install]
+WantedBy=multi-user.target

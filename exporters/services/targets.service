@@ -1,0 +1,9 @@
+[Unit]
+Description=Run 1 __ targets_exporter.py
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c '/opt/venv/bin/python3 /app/scripts/urls_exporter/targets_exporter.py --config /app/configs/targets_exporter.yml >> /one/logs/targets_exporter.log 2>&1'
+
+[Install]
+WantedBy=multi-user.target

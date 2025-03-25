@@ -1,0 +1,12 @@
+[Unit]
+Description=Run 3 __ blackbox_config.py
+After=targets-fetcher.service
+Requires=targets-fetcher.service
+
+[Service]
+Type=oneshot
+ExecCondition=/bin/sh -c '[ "$(systemctl show -p ExecMainStatus --value targets-fetcher.service)" -eq 0 ]'
+ExecStart=/bin/sh -c '/opt/venv/bin/python3 /app/scripts/urls_exporter/blackbox_config.py --config /app/configs/blackbox_config.yml >> /one/logs/blackbox_config.log 2>&1'
+
+[Install]
+WantedBy=multi-user.target
